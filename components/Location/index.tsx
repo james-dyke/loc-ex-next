@@ -53,15 +53,18 @@ export default function LocationWidget({ data }: LocationWidgetProps) {
             {data.radioGroup.title}
           </label>
           <div className="flex flex-row pb-2 flex-wrap">
-            {data.radioGroup.buttonData.map((radioButtonData: radioGroup) => (
-              <RadioButton
-                label={radioButtonData.label}
-                value={radioButtonData.location}
-                name={"location"}
-                checked={location === radioButtonData.location}
-                onChange={handleOptionChange}
-              />
-            ))}
+            {data.radioGroup.buttonData.map(
+              (radioButtonData: radioGroup, index: number) => (
+                <RadioButton
+                  key={index}
+                  label={radioButtonData.label}
+                  value={radioButtonData.location}
+                  name={"location"}
+                  checked={location === radioButtonData.location}
+                  onChange={handleOptionChange}
+                />
+              )
+            )}
           </div>
           <div className="text-left flex flex-col">
             <label htmlFor="keyword">
@@ -85,14 +88,13 @@ export default function LocationWidget({ data }: LocationWidgetProps) {
       </form>
       <div>
         <ul className="mt-2">
-          {results.map((result: result) => (
-            <>
-              <Panel
-                title={result.name}
-                address={result.vicinity}
-                rating={result.rating}
-              ></Panel>
-            </>
+          {results.map((result: result, index: number) => (
+            <Panel
+              key={index}
+              title={result.name}
+              address={result.vicinity}
+              rating={result.rating}
+            ></Panel>
           ))}
         </ul>
       </div>
