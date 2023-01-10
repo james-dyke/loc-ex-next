@@ -10,12 +10,13 @@ type Data = {
 }
 
 type params = {
-  location: string  | undefined;
-  keyword: string | undefined;
+  location: string  | undefined | string[];
+  keyword: string | undefined | string[];
 }
 
-const fetchInfo = async(params: params) => {
-    const requestUrl = url + '&location=' + params.location + '&keyword=' + params.keyword;
+const fetchInfo = async(req:NextApiRequest) => {
+    const { location, keyword } = req.query;
+    const requestUrl = url + '&location=' + location + '&keyword=' + keyword;
     const response = await fetch(requestUrl);
     const data = await response.json();
     return data;
@@ -26,11 +27,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   const query = req.query;
-  const { location, keyword } = query;
-  const params = {
-    location,
-    keyword
-  }
-  const result = await fetchInfo(params);
+
+  const result = await fetchInfo(req);
     res.status(200).json(result);
 }
