@@ -8,11 +8,6 @@ type Data = {
   name: string
 }
 
-type params = {
-  location: string  | undefined | string[];
-  keyword: string | undefined | string[];
-}
-
 const fetchInfo = async(req:NextApiRequest) => {
     const { location, keyword } = req.query;
     const requestUrl = url + '&location=' + location + '&keyword=' + keyword;
@@ -25,8 +20,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const query = req.query;
-
   const result = await fetchInfo(req);
     res.status(200).json(result);
 }
