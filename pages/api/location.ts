@@ -4,7 +4,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 const apikey = 'AIzaSyDIb6tuC5IBX5yf8pYBMs_hLkZicqDHZ9k';
 const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=${apikey}&radius=4000`
 
-
 type Data = {
   name: string
 }
